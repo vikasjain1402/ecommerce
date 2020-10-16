@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content-body1 %}
+{% load static %}
+<div style="display: flex;flex-wrap: wrap; flex-direction: row; justify-content: space-around;">
+{% for product in products %}
+    <div class="card" style="max-width: 30%;">
+        <img src="{{product.imageURL}}" class="card-img-top" alt="" style="max-height: 10em;">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-outline-primary btn-sm">Add to Cart</button>
+            <button type="button" class="btn btn-outline-primary btn-sm">View</button>
+            <small class="text-x-bold float-right font-weight-bold"><h4>Rs {{product.price|floatformat:2}}</h4></small>
+        </div>
+    </div>
+{% endfor %}    
+    
+    
+    
+</div>
+
+{% endblock %}

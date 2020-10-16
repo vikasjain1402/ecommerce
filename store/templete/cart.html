@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content-body1 %}
+
+<div class="container">
+    <div style="display: flex;flex-direction: column;">
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <a href="/">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                        </svg>
+                        Continue Shopping
+                    </a>   
+                </div>
+                
+                <div class="card-body">
+                    <ul class="nav nav-pills nav-fill">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Total Amount :</a>
+                            <p>{{order.get_cart_total}}</p>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Total Items</a>
+                            <p>{{order.get_cart_items}}</p>
+
+                        </li>
+
+                        <li class="nav-item align-self-center">
+                            <a class="nav-link active" href="/checkout">Checkout</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <table class="table margin-top:100px">
+            <thead>
+                <tr>
+                    <th scope="col">S.no</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.quantity}}
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </td>
+                    <td>{{item.product.price}}</td>
+                    <td>{{item.get_total}}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+{% endblock %}
