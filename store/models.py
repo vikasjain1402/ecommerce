@@ -42,8 +42,8 @@ class Order(models.Model):
         total=0
         for i in items:
             total+=i.quantity*i.product.price
-        print(total,"in property get cart total")    
-        return total
+   
+        
     @property
     def get_cart_items(self):
         items1=self.order_item_set.all()
