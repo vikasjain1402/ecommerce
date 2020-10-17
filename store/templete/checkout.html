@@ -21,9 +21,10 @@
                         </form>
 
                     </li>
-                    <li class="list-group-item">Shipping Information</li>
-                    <li class="list-group-item">
-                        <form>
+                    <form id ="shipping-form">
+                        <li class="list-group">Shipping Information</li>
+                        <li class="list-group-item ">
+                       
                     
                             <div class="form-group">
                               
@@ -83,4 +84,13 @@
     </div>
 </div>
 
+<script type="text/javascript"> 
+var shipping='{{order.shipping}}'
+console.log(shipping)
+
+if (shipping=='True'){
+    console.log(shipping)
+}else {   
+document.getElementById('shipping-form').style.display='None';}
+</script>
 {% endblock %}
