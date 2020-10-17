@@ -12,25 +12,24 @@
                         <form>
                             <div class="form-row">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Name">
+                                    <input type="text" class="form-control" placeholder="{{user.customer.name}}">
                                 </div>
                                 <div class="col">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" placeholder="{{user.customer.email}}">
                                 </div>
                             </div>
                         </form>
 
                     </li>
-                    <form id ="shipping-form">
+                    <form id="shipping-form">
                         <li class="list-group">Shipping Information</li>
                         <li class="list-group-item ">
-                       
-                    
+
                             <div class="form-group">
-                              
+
                                 <input type="text" class="form-control" id="inputAddress" placeholder="Address">
                             </div>
-                           
+
                             <div class="form-row">
                                 <div class="form-group col-md-5">
                                     <input type="text" class="form-control" id="inputCity" placeholder="City">
@@ -43,12 +42,16 @@
                                 </div>
                             </div>
 
-                        </form>
+                    </form>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-success">Continue</button>
+                <button type="button" class="btn btn-success" id='continue'>Continue</button>
             </div>
+
         </div>
+        <button type="button" class="btn btn-secondary btn-sm" id="payment" style="display: None;">PayPal
+            Payment</button>
+
     </div>
     <div class="col-sm-6">
         <div class="card">
@@ -61,36 +64,59 @@
                                 d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                         </svg>
                         Continue Shopping
-                    </a>   
+                    </a>
                 </div>
                 <h5 class="card-title">Order Summary</h5>
                 <table class="table margin-top:100px">
 
                     <tbody>
-                     {% for item in items %}   
+                        {% for item in items %}
                         <tr>
                             <th scope="row"><img src="{{item.product.imageURL}}" style="max-width: 2em;"></th>
                             <td>{{item.product.name}}</td>
                             <td>{{item.quantity}}</td>
                             <td>{{item.product.price}}</td>
                         </tr>
-                    {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
-                <h6>Items      :{{order.get_cart_items}}</h6>
-                <h4>Total Rs   :{{order.get_cart_total}}</h4>
+                <h6>Items :{{order.get_cart_items}}</h6>
+                <h4>Total Rs :{{order.get_cart_total}}</h4>
             </div>
         </div>
     </div>
+
+
+
 </div>
 
-<script type="text/javascript"> 
-var shipping='{{order.shipping}}'
-console.log(shipping)
+<script type="text/javascript">
+    var shipping='{{order.shipping}}'
 
-if (shipping=='True'){
+
+    var shipping = '{{order.shipping}}'
     console.log(shipping)
-}else {   
-document.getElementById('shipping-form').style.display='None';}
+
+    if (shipping == 'True') {
+        console.log(shipping)
+    } else {
+        document.getElementById('shipping-form').style.display = 'None';
+    }
+
+    var form = document.getElementById('continue')
+    form.addEventListener("click", function (e) {
+        e.preventDefault()
+        console.log("continie trigggered")
+        document.getElementById("payment").style.display = 'block'
+        document.getElementById("continue").style.display = 'None'
+    })
+
+    document.getElementById('payment').addEventListener('click',function(e){
+        submitformdata()
+    })
+    function submitformdata(){
+        console.log("payment btton pressed")
+
+    }
 </script>
 {% endblock %}
